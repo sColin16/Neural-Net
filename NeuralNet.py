@@ -61,6 +61,8 @@ class CostGate:
 
         truth_table = (np.argmax(predicted_labels.values, axis=1) ==
                        np.argmax(true_labels, axis=1))
+                       
+        #print(np.where(truth_table == False)[0])
 
         return (np.count_nonzero(truth_table))/len(truth_table) * 100
 
@@ -71,8 +73,8 @@ class NeuralLayer:
 
     def __init__(self, parameters, activation, activator_params=None,
                  learning_rate=1):
-        '''Stores parameters ('a'), activation functions, and layer's learning rate,
-        which can be modified to prevent vanishing gradients'''
+        '''Stores parameters ('a'), activation functions, and layer's
+        learning rate, which can be modified to prevent vanishing gradients'''
 
         self.a = Unit(parameters, np.zeros(parameters.shape))
         self.activation = activation_functions[activation]['activator']
@@ -210,8 +212,8 @@ class Trainer:
         }
 
     def train(self, training_settings={}, halt_settings={}):
-        '''Trains the neural network with the specified conditions, and then reports
-        on the results of training'''
+        '''Trains the neural network with the specified conditions,
+        and then reports on the results of training'''
 
         self.training_settings = set_defaults(training_settings,
                                               self.DEFAULT_TRAINING_SETTINGS)
@@ -359,7 +361,7 @@ class Preprocessor:
 
         stats = {'inputs': {}, 'labels': {}}
 
-        for key, value in data_sample.items:
+        for key, value in data_sample.items():
             stats[key] = {
                 'mean': np.mean(value, axis=0),
                 'std': np.std(value, axis=0)
